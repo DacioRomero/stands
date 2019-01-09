@@ -11,12 +11,14 @@ require('dotenv').config({
 // MIDDLEWARE
 const app = express();
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({
+  extended: true,
+}));
 
 // ROUTES
 app.get('/', (req, res) => {
-  res.send('Hello, World!')
-})
+  res.send('Hello, World!');
+});
 
 // LISTENER
 if (require.main === module) {
