@@ -23,11 +23,7 @@ mongoose.connect(
 );
 
 // ROUTES
-app.get('/', (req, res) => {
-  res.send('Hello, World!');
-});
-
-app.use('/reports', require('./controllers/reports'));
+app.use(require('./controllers'));
 
 // LISTENER
 if (require.main === module) {
