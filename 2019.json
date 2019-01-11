@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$ref": "#/definitions/DeepSpace",
+  "definitions": {
+      "DeepSpace": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+              "rocket": {
+                  "$ref": "#/definitions/Rocket"
+              },
+              "cargoShip": {
+                  "$ref": "#/definitions/CargoShip"
+              }
+          },
+          "required": [
+              "cargoShip",
+              "rocket"
+          ],
+          "title": "Welcome"
+      },
+      "CargoShip": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+              "hatches": {
+                  "type": "array",
+                  "items": {
+                      "$ref": "#/definitions/Hatch"
+                  },
+                  "minItems": 6,
+                  "maxItems": 6
+              }
+          },
+          "required": [
+              "hatches"
+          ],
+          "title": "CargoShip"
+      },
+      "Hatch": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+              "panel": {
+                  "type": "boolean"
+              },
+              "cargo": {
+                  "type": "boolean"
+              }
+          },
+          "required": [
+              "cargo",
+              "panel"
+          ],
+          "title": "Hatch"
+      },
+      "Rocket": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+              "hatches": {
+                  "type": "array",
+                  "items": {
+                      "$ref": "#/definitions/Hatch"
+                  },
+                  "minItems": 8,
+                  "maxItems": 8
+              },
+              "highestLevel": {
+                  "type": "integer"
+              }
+          },
+          "required": [
+              "hatches",
+              "highestLevel"
+          ],
+          "title": "Rocket"
+      }
+  }
+}
