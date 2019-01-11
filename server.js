@@ -3,6 +3,7 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 require('dotenv').config({
   path: path.join(__dirname, '.env'),
@@ -15,10 +16,18 @@ app.use(bodyParser.urlencoded({
   extended: true,
 }));
 
+// DATABASE
+mongoose.connect(
+  process.env.MONGODB_URI || 'mongodb://localhost/stands',
+  { useNewUrlParser: true },
+);
+
 // ROUTES
 app.get('/', (req, res) => {
   res.send('Hello, World!');
 });
+
+app.use('/reports', require('./controllers/reports'));
 
 // LISTENER
 if (require.main === module) {
