@@ -1,14 +1,12 @@
 // models/report.js
 const mongoose = require('mongoose');
+const fs = require('fs');
+const path = require('path');
+const Ajv = require('ajv');
+
+const ajv = new Ajv();
 
 const { Schema } = mongoose;
-
-// TODO: Separate year-specific data fields
-// - discriminators or JSON validated with JSON Schema
-const HatchSchema = new Schema({
-  hasPanel: { type: Boolean, default: false },
-  hasCargo: { type: Boolean, default: false },
-}, { _id: false });
 
 const ReportSchema = new Schema({
   info: {
@@ -18,8 +16,17 @@ const ReportSchema = new Schema({
     round: { type: Number, required: true },
   },
   data: {
-    rocketHatches: [HatchSchema],
-    cargoShipHatches: [HatchSchema],
+    type: Object,
+    required() {
+      return fs.existsSync(path.join(__dirname, `../schemas/${this.info.year}.json`));
+    },
+    validate: {
+      validator(v) {
+        const schema = JSON.parse(fs.readFileSync(path.join(__dirname, `../schemas/${this.info.year}.json`), 'utf8'));
+        return ajv.validate(schema, v);
+      },
+      message: () => ajv.errorsText(),
+    },
   },
 });
 

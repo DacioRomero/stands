@@ -25,6 +25,7 @@
     "nodemon": "^1.18.9"
   },
   "dependencies": {
+    "ajv": "^6.6.2",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "dotenv": "^6.2.0",
