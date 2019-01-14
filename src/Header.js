@@ -17,7 +17,8 @@ export default class extends Component {
 
   render() {
     var Account;
-    if(this.props.loginKey == null) {
+
+    if(!this.props.loggedIn) {
       Account = (
         <div className="buttons">
           <Button isColor="primary">
@@ -30,7 +31,7 @@ export default class extends Component {
       );
     } else {
       Account = (
-        <Button isColor="primary">
+        <Button isColor="primary" onClick={this.props.logoutHandler}>
           <strong>Logout</strong>
         </Button>
       );

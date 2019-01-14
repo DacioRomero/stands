@@ -10,7 +10,14 @@ export default class extends Component {
 
   submitHandler(e) {
     e.preventDefault();
-    alert('Submit test success!');
+
+    const username = e.target.username.value;
+    const password = e.target.password.value;
+
+    if(this.props.handler(username, password) !== false) {
+      e.target.reset();
+      this.props.close()
+    }
   }
 
   render() {
@@ -20,24 +27,25 @@ export default class extends Component {
         <ModalContent>
           <form onSubmit={this.submitHandler}>
             <Field>
-              <Label>
-                Username
-            </Label>
+              <Label>Username</Label>
               <Control>
-                <Input type="text" placeholder="DozerBot22" />
+                <Input name="username" type="text" placeholder="DozerBot22" />
               </Control>
             </Field>
             <Field>
-              <Label>
-                Password
-            </Label>
+              <Label>Password</Label>
               <Control>
-                <Input type="text" placeholder="******" />
+                <Input name="password" type="password" placeholder="******" />
+              </Control>
+            </Field>
+            <Field>
+              <Control>
+                <Input type="submit" />
               </Control>
             </Field>
           </form>
         </ModalContent>
-        <ModalClose onClick={this.props.close}/>
+        <ModalClose onClick={this.props.close} />
       </Modal>
     );
   }

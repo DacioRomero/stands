@@ -12,13 +12,15 @@ class App extends Component {
     super(props);
 
     this.state = {
-      standsUrl: 'http://localhost:3000/',
+      standsUrl: 'http://localhost:3000',
       loginKey: null,
       loginModalActive: false
     }
 
     this.closeLoginModal = this.closeLoginModal.bind(this);
     this.openLoginModal = this.openLoginModal.bind(this);
+    this.loginHandler = this.loginHandler.bind(this);
+    this.logoutHandler = this.logoutHandler.bind(this);
   }
 
   closeLoginModal() {
@@ -30,7 +32,7 @@ class App extends Component {
   }
 
   async loginHandler(username, password) {
-    const response = await fetch('http://localhost:3000/login', {
+    const response = await fetch(`${this.state.standsUrl}/login`, {
       method: 'POST',
       body: JSON.stringify({ username, password }),
       headers: {
@@ -42,17 +44,23 @@ class App extends Component {
       return false;
     }
 
-    return await response.text();
+    this.setState({ loginKey: await response.text() });
+
+    return true;
+  }
+
+  logoutHandler() {
+    this.setState({ loginKey: null });
   }
 
   render() {
     return (
       <div className="App">
-        <Header openLoginModal={this.openLoginModal} loginKey={this.state.loginKey} />
+        <Header logoutHandler={this.logoutHandler} openLoginModal={this.openLoginModal} loggedIn={this.state.loginKey !== null} />
         <Home />
         {/* <ReportForm /> */}
         {/* <Teams /> */}
-        <Login close={this.closeLoginModal} active={this.state.loginModalActive} />
+        <Login handler={this.loginHandler} close={this.closeLoginModal} active={this.state.loginModalActive} />
       </div>
     );
   }
