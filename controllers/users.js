@@ -2,6 +2,7 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const asyncHandler = require('express-async-handler');
+const verifyAuthorization = require('../utils/verify-authorization');
 
 const User = require('../models/user');
 
@@ -33,5 +34,9 @@ router.post('/login', asyncHandler(async (req, res) => {
     return res.status(200).send(token);
   });
 }));
+
+router.post('/verify', verifyAuthorization, (req, res) => {
+  res.status(200).send('Valid authorization');
+});
 
 module.exports = router;
