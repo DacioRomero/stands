@@ -46,14 +46,14 @@ export default class extends Component {
           <NavbarBurger onClick={this.menuHandler} isActive={this.state.menuActive} />
         </NavbarBrand>
         <NavbarMenu isActive={this.state.menuActive}>
-            <NavbarStart>
+            {/* <NavbarStart>
               <NavbarItem href="#">
                 Teams
               </NavbarItem>
               <NavbarItem href="#">
                 Events
               </NavbarItem>
-            </NavbarStart>
+            </NavbarStart> */}
             <NavbarEnd>
               <NavbarItem>
                 { Account }
