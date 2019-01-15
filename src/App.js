@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
 
+import 'bulma/css/bulma.min.css';
+import 'bulmaswatch/darkly/bulmaswatch.min.css'
+
 import Header from './Header';
 import Login from './Login';
 import Reports from './Reports';
-
-import 'bulma/css/bulma.min.css';
-import 'bulmaswatch/darkly/bulmaswatch.min.css'
 
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      standsUrl: 'http://localhost:3000',
       loginKey: null,
       loginModalActive: false
     }
@@ -32,7 +31,7 @@ class App extends Component {
   }
 
   async loginHandler(username, password) {
-    const response = await fetch(`${this.state.standsUrl}/login`, {
+    const response = await fetch('http://localhost:3000/login', {
       method: 'POST',
       body: JSON.stringify({ username, password }),
       headers: {

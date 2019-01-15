@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Navbar, NavbarItem, NavbarStart, NavbarBrand, NavbarMenu, NavbarBurger, NavbarEnd, Button } from 'bloomer';
+import { Navbar, NavbarItem, NavbarBrand, NavbarMenu, NavbarBurger, NavbarEnd, Button } from 'bloomer';
 
 export default class extends Component {
   constructor(props) {
@@ -46,14 +46,6 @@ export default class extends Component {
           <NavbarBurger onClick={this.menuHandler} isActive={this.state.menuActive} />
         </NavbarBrand>
         <NavbarMenu isActive={this.state.menuActive}>
-            {/* <NavbarStart>
-              <NavbarItem href="#">
-                Teams
-              </NavbarItem>
-              <NavbarItem href="#">
-                Events
-              </NavbarItem>
-            </NavbarStart> */}
             <NavbarEnd>
               <NavbarItem>
                 { Account }

@@ -1,17 +1,24 @@
 import React, { Component } from 'react';
-import Loading from './Loading';
 import { Table, Container, Title, Columns, Column, Button } from 'bloomer';
+import Loading from './Loading';
+import ReportModal from './ReportModal';
 
 export default class extends Component {
   constructor(props) {
     super(props);
 
     this.state = { reports: null };
+    this.openModal = this.openModal.bind(this);
+    this.reportModal = React.createRef();
   }
 
   async componentDidMount() {
     const response = await fetch('http://localhost:3000/reports');
     this.setState({ reports: await response.json() });
+  }
+
+  openModal() {
+    this.reportModal.current.showSchema(2019);
   }
 
   render() {
@@ -26,7 +33,7 @@ export default class extends Component {
             <Title>Reports</Title>
           </Column>
           <Column isSize={6}>
-            <Button isColor="dark" className="is-pulled-right">New Report</Button>
+            <Button isColor="dark" className="is-pulled-right" onClick={this.openModal}>New Report</Button>
           </Column>
           <Column isSize={12}>
             <Table isStriped={true} width="100%">
@@ -53,6 +60,7 @@ export default class extends Component {
             </Table>
           </Column>
         </Columns>
+        <ReportModal ref={this.reportModal}/>
       </Container>
     );
   }

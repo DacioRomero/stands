@@ -5,14 +5,13 @@ import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 export default class extends Component {
   render() {
     return (
-      <span style={{
-        textAlign: "center",
-        position: "absolute",
-        top: "50%",
-        left: "50%"
+      <div width="100%" height="100%" style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center"
       }}>
         Loading... <FontAwesomeIcon icon={faSpinner} pulse />
-      </span>
+      </div>
     )
   }
 }
