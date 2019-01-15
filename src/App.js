@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
+
+import Header from './Header';
+import Login from './Login';
+import Reports from './Reports';
+
 import 'bulma/css/bulma.min.css';
 import 'bulmaswatch/darkly/bulmaswatch.min.css'
-import Header from './Header';
-import Home from './Home';
-// import Teams from "./Teams";
-// import ReportForm from './ReportForm';
-import Login from './Login';
 
 class App extends Component {
   constructor(props) {
@@ -57,9 +57,7 @@ class App extends Component {
     return (
       <div className="App">
         <Header logoutHandler={this.logoutHandler} openLoginModal={this.openLoginModal} loggedIn={this.state.loginKey !== null} />
-        <Home />
-        {/* <ReportForm /> */}
-        {/* <Teams /> */}
+        <Reports />
         <Login handler={this.loginHandler} close={this.closeLoginModal} active={this.state.loginModalActive} />
       </div>
     );
