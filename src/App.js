@@ -1,64 +1,22 @@
 import React, { Component } from 'react';
 
-import 'bulma/css/bulma.min.css';
-import 'bulmaswatch/darkly/bulmaswatch.min.css'
+import CssBaseline from '@material-ui/core/CssBaseline';
+
+import 'typeface-roboto';
 
 import Header from './Header';
-import Login from './Login';
 import Reports from './Reports';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      loginKey: null,
-      loginModalActive: false
-    }
-
-    this.closeLoginModal = this.closeLoginModal.bind(this);
-    this.openLoginModal = this.openLoginModal.bind(this);
-    this.loginHandler = this.loginHandler.bind(this);
-    this.logoutHandler = this.logoutHandler.bind(this);
-  }
-
-  closeLoginModal() {
-    this.setState({ loginModalActive: false });
-  }
-
-  openLoginModal() {
-    this.setState({ loginModalActive: true });
-  }
-
-  async loginHandler(username, password) {
-    const response = await fetch('http://localhost:3000/login', {
-      method: 'POST',
-      body: JSON.stringify({ username, password }),
-      headers: {
-        'Content-Type': 'application/json'
-      },
-    });
-
-    if (response.status !== 200) {
-      return false;
-    }
-
-    this.setState({ loginKey: await response.text() });
-
-    return true;
-  }
-
-  logoutHandler() {
-    this.setState({ loginKey: null });
-  }
-
   render() {
     return (
-      <div className="App">
-        <Header logoutHandler={this.logoutHandler} openLoginModal={this.openLoginModal} loggedIn={this.state.loginKey !== null} />
-        <Reports />
-        <Login handler={this.loginHandler} close={this.closeLoginModal} active={this.state.loginModalActive} />
-      </div>
+      <React.Fragment>
+        <CssBaseline />
+        <Header />
+        <main>
+          <Reports />
+        </main>
+      </React.Fragment>
     );
   }
 }

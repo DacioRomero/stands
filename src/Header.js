@@ -1,58 +1,41 @@
 import React, { Component } from 'react';
-import { Navbar, NavbarItem, NavbarBrand, NavbarMenu, NavbarBurger, NavbarEnd, Button } from 'bloomer';
 
-export default class extends Component {
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles'
+
+import LoginModal from './LoginModal';
+
+const styles = {
+  grow: {
+    flexGrow: 1
+  }
+}
+
+class Header extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { menuActive: false };
-    this.menuHandler = this.menuHandler.bind(this);
-  }
-
-  menuHandler() {
-    this.setState(prevState => ({
-      menuActive: !prevState.menuActive
-    }));
+    this.state = {
+      auth: false
+    };
   }
 
   render() {
-    var Account;
-
-    if(!this.props.loggedIn) {
-      Account = (
-        <div className="buttons">
-          <Button isColor="primary">
-            <strong>Sign up</strong>
-          </Button>
-          <Button isColor="light" onClick={this.props.openLoginModal}>
-            Log in
-          </Button>
-        </div>
-      );
-    } else {
-      Account = (
-        <Button isColor="primary" onClick={this.props.logoutHandler}>
-          <strong>Logout</strong>
-        </Button>
-      );
-    }
+    const { classes } = this.props;
 
     return (
-      <Navbar>
-        <NavbarBrand>
-          <NavbarItem href="/">
+      <AppBar position="sticky">
+        <Toolbar>
+          <Typography variant="h6" color="inherit" className={classes.grow}>
             The Stands
-          </NavbarItem>
-          <NavbarBurger onClick={this.menuHandler} isActive={this.state.menuActive} />
-        </NavbarBrand>
-        <NavbarMenu isActive={this.state.menuActive}>
-            <NavbarEnd>
-              <NavbarItem>
-                { Account }
-              </NavbarItem>
-            </NavbarEnd>
-        </NavbarMenu>
-      </Navbar>
-    );
+          </Typography>
+          <LoginModal buttonColor="inherit" />
+        </Toolbar>
+      </AppBar>
+    )
   }
 }
+
+export default withStyles(styles)(Header);
