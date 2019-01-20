@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 
-import CssBaseline from '@material-ui/core/CssBaseline';
-
 import 'typeface-roboto';
 
-import Header from './Header';
-import Reports from './Reports';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Header from './components/Header';
+import Reports from './components/Reports';
 
 class App extends Component {
   render() {

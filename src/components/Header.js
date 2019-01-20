@@ -5,7 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles'
 
-import LoginModal from './LoginModal';
+import AccountButtons from './AccountButtons';
 
 const styles = {
   grow: {
@@ -14,13 +14,9 @@ const styles = {
 }
 
 class Header extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      auth: false
-    };
-  }
+  state = {
+    auth: false
+  };
 
   render() {
     const { classes } = this.props;
@@ -31,10 +27,10 @@ class Header extends Component {
           <Typography variant="h6" color="inherit" className={classes.grow}>
             The Stands
           </Typography>
-          <LoginModal buttonColor="inherit" />
+          <AccountButtons />
         </Toolbar>
       </AppBar>
-    )
+    );
   }
 }
 

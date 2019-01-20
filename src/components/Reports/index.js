@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import { connect } from 'react-redux';
+
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
@@ -8,39 +10,29 @@ import TableBody from '@material-ui/core/TableBody';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
-import ReportModal from './Modal';
+import NewReport from './NewReport';
 
-const standsUrl = process.env.REACT_APP_STANDS_URL
-
-export default class extends Component {
-  state = { reports: [] };
-
-  async componentDidMount() {
-    const response = await fetch(`${standsUrl}/reports`);
-    const reports = await response.json();
-    this.setState({ reports });
-  }
-
+class Reports extends Component {
   render() {
-    const rows = this.state.reports.map(report => {
+    const rows = this.props.reports.map(report => {
       const id = report._id;
       const { team, year, event, round } = report.info;
 
       return (
-        <TableRow id={id}>
+        <TableRow key={id}>
           <TableCell>{team}</TableCell>
           <TableCell align="right">{year}</TableCell>
           <TableCell align="right">{event}</TableCell>
           <TableCell align="right">{round}</TableCell>
         </TableRow>
-      )
-    })
+      );
+    });
 
     return (
-      <Grid container p={1}>
-        <Grid container xs={12} justify="space-between">
+      <React.Fragment>
+        <Grid container justify="space-between">
             <Typography variant="h6">Reports</Typography>
-            <ReportModal buttonColor="secondary" />
+            <NewReport buttonColor="secondary" />
         </Grid>
         <Grid item xs={12}>
           <Table>
@@ -57,7 +49,16 @@ export default class extends Component {
             </TableBody>
           </Table>
         </Grid>
-      </Grid>
+      </React.Fragment>
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  reports: state.reports
+});
+
+export default connect(
+  mapStateToProps,
+  null
+)(Reports);
