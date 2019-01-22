@@ -1,13 +1,11 @@
 // controllers/index.js
 const express = require('express');
+const cors = require('cors');
 
 const router = express.Router();
 
-router.all('*', (req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization');
-  next();
-});
+router.use(cors());
+router.options('*', cors());
 
 router.get('/', (req, res) => {
   res.send('Hello, World!');
