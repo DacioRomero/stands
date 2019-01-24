@@ -1,25 +1,9 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$ref": "#/definitions/DeepSpace",
-  "definitions": {
-    "DeepSpace": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "rocket": {
-          "$ref": "#/definitions/Rocket"
-        },
-        "cargoShip": {
-          "$ref": "#/definitions/CargoShip"
-        }
-      },
-      "required": [
-        "cargoShip",
-        "rocket"
-      ],
-      "title": "Welcome"
-    },
-    "CargoShip": {
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "rocket": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
@@ -30,41 +14,6 @@
           },
           "minItems": 6,
           "maxItems": 6
-        }
-      },
-      "required": [
-        "hatches"
-      ],
-      "title": "CargoShip"
-    },
-    "Hatch": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "panel": {
-          "type": "boolean"
-        },
-        "cargo": {
-          "type": "boolean"
-        }
-      },
-      "required": [
-        "cargo",
-        "panel"
-      ],
-      "title": "Hatch"
-    },
-    "Rocket": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "hatches": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Hatch"
-          },
-          "minItems": 8,
-          "maxItems": 8
         },
         "highestLevel": {
           "type": "integer"
@@ -75,6 +24,49 @@
         "highestLevel"
       ],
       "title": "Rocket"
+    },
+    "cargoShip": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "hatches": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Hatch"
+          },
+          "minItems": 8,
+          "maxItems": 8
+        }
+      },
+      "required": [
+        "hatches"
+      ],
+      "title": "Cargo Ship"
+    }
+  },
+  "required": [
+    "cargoShip",
+    "rocket"
+  ],
+  "definitions": {
+    "Hatch": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "panel": {
+          "type": "boolean",
+          "default": false
+        },
+        "cargo": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "required": [
+        "cargo",
+        "panel"
+      ],
+      "title": "Hatch"
     }
   }
 }
