@@ -1,0 +1,72 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "rocket": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "hatches": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Hatch"
+          },
+          "minItems": 6,
+          "maxItems": 6
+        },
+        "highestLevel": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "hatches",
+        "highestLevel"
+      ],
+      "title": "Rocket"
+    },
+    "cargoShip": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "hatches": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Hatch"
+          },
+          "minItems": 8,
+          "maxItems": 8
+        }
+      },
+      "required": [
+        "hatches"
+      ],
+      "title": "Cargo Ship"
+    }
+  },
+  "required": [
+    "cargoShip",
+    "rocket"
+  ],
+  "definitions": {
+    "Hatch": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "panel": {
+          "type": "boolean",
+          "default": false
+        },
+        "cargo": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "required": [
+        "cargo",
+        "panel"
+      ],
+      "title": "Hatch"
+    }
+  }
+}
